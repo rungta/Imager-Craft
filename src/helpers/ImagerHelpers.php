@@ -338,10 +338,10 @@ class ImagerHelpers
                         if (\is_array($param[0])) {
                             $effectString .= '_' . $eff;
                             foreach ($param as $paramArr) {
-                                $effectString .= '-' . implode('-', $paramArr);
+                                $effectString .= '-' . json_encode($paramArr);
                             }
                         } else {
-                            $effectString .= '_' . $eff . '-' . implode('-', $param);
+                            $effectString .= '_' . $eff . '-' . json_encode($param);
                         }
                     } else {
                         $effectString .= '_' . $eff . '-' . $param;
@@ -354,7 +354,7 @@ class ImagerHelpers
                     $watermarkString = '';
 
                     foreach ($v as $eff => $param) {
-                        $watermarkString .= $eff . '-' . (\is_array($param) ? implode('-', $param) : $param);
+                        $watermarkString .= $eff . '-' . (\is_array($param) ? json_encode($param) : $param);
                     }
 
                     $r .= '_' . (ImagerService::$transformKeyTranslate[$k] ?? $k) . '_' . mb_substr(md5($watermarkString), 0, 10);
@@ -367,7 +367,7 @@ class ImagerHelpers
 
                     $r .= '_' . (ImagerService::$transformKeyTranslate[$k] ?? $k) . '_' . mb_substr($optString, 0, strlen($optString) - 1);
                 } else {
-                    $r .= '_' . (ImagerService::$transformKeyTranslate[$k] ?? $k) . (\is_array($v) ? implode('-', $v) : $v);
+                    $r .= '_' . (ImagerService::$transformKeyTranslate[$k] ?? $k) . (\is_array($v) ? json_encode($v) : $v);
                 }
             }
         }
